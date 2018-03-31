@@ -9,7 +9,10 @@ import (
 
 func Transfer(c *gin.Context) {
 	var request request.TransferRequest
-	c.Bind(&request)
-	res := services.TransferService(request)
-	c.JSON(res.Header, res.Body)
+	if c.Bind(&request) != nil {
+		c.JSON(400, "bad request")
+	} else {
+		res := services.TransferService(request)
+		c.JSON(res.Header, res.Body)
+	}
 }

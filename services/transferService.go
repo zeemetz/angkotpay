@@ -14,6 +14,7 @@ func getID(source model.User, destination model.User, status string) (uint, uint
 func TransferService(request request.TransferRequest) response.Response {
 	var source model.User
 	source.Phone = request.From
+	source.Pin = request.SourcePIN
 	var destination model.User
 	destination.Phone = request.To
 
@@ -44,11 +45,11 @@ func TransferService(request request.TransferRequest) response.Response {
 		transaction.Notes += " balance exceed limit "
 		res.Header = 400
 		error.ErrorCode = 5
-	} else if tx.Model(&source).Updates(&source).Error != nil {
+	} else if tx.Model(&source).Updates(source).Error != nil {
 		transaction.Notes += " cannot save updates (source) to db "
 		res.Header = 400
 		error.ErrorCode = 6
-	} else if tx.Model(&destination).Updates(&destination).Error != nil {
+	} else if tx.Model(&destination).Updates(destination).Error != nil {
 		transaction.Notes += " cannot save updates (destination) to db "
 		res.Header = 400
 		error.ErrorCode = 6

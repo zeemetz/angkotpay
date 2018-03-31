@@ -11,6 +11,7 @@ func init() {
 	engine.GetEngine().POST("/authenticate", controller.AuthenticateController)
 	// engine.GetEngine().POST("/cashin", controller.CashIn)
 	engine.GetEngine().POST("/transfer", controller.Transfer)
+	engine.GetEngine().POST("/update/profile", controller.UserController)
 }
 
 func main() {
