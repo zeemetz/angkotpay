@@ -6,12 +6,13 @@ import (
 	"angkotpay/model"
 )
 
-func UserService(user model.User) response.Response {
+func UserService(req model.User) response.Response {
 	var res response.Response
-	if engine.GetORM().Find(&user, model.User{Phone: user.Phone}).Error != nil {
+	var user model.User
+	if engine.GetORM().Find(&user, model.User{Phone: req.Phone}).Error != nil {
 		res.Header = 404
 		res.Body = response.ErrorResponse{ErrorCode: 8, Message: "user not found"}
-	} else if engine.GetORM().Model(&user).Updates(user).Error != nil {
+	} else if engine.GetORM().Model(&user).Updates(req).Error != nil {
 		res.Header = 400
 		res.Body = response.ErrorResponse{ErrorCode: 8, Message: "invalid user updates"}
 	} else {
