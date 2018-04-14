@@ -10,6 +10,7 @@ type User struct {
 	gorm.Model
 	Phone      string
 	DeviceID   string
+	Token      string
 	Name       string
 	Pin        string
 	Balance    int64 `gorm:"default:0"`
