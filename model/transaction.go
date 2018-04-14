@@ -21,6 +21,7 @@ type Transaction struct {
 	Notes           string
 	TransactionType string
 	Status          string
+	LastBalance     int64
 }
 
 func init() {

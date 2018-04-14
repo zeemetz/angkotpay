@@ -62,6 +62,7 @@ func TransferService(request request.TransferRequest) response.Response {
 	} else {
 		res.Header = 200
 		error.ErrorCode = 0
+		transaction.LastBalance = source.Balance
 	}
 
 	if res.Header != 200 {

@@ -9,6 +9,7 @@ import (
 type User struct {
 	gorm.Model
 	Phone      string
+	DeviceID   string
 	Name       string
 	Pin        string
 	Balance    int64 `gorm:"default:0"`
